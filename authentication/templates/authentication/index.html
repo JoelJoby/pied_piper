@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Swipe</title>
+    <link href="{% static 'dist/css/lib/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Welcome to Swipe, {{ user.username|default:"Guest" }}!</h1>
+        {% if user.is_authenticated %}
+        <p>You are logged in.</p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+        {% else %}
+        <p>You are not logged in.</p>
+        <a href="{% url 'login' %}" class="btn btn-primary">Sign In</a>
+        {% endif %}
+    </div>
+</body>
+
+</html>

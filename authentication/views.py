@@ -8,8 +8,15 @@ class CustomLoginView(LoginView):
     redirect_authenticated_user = True
 
 # Custom Signup View (Placeholder)
-class SignupView(TemplateView):
+# Custom Signup View
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from .forms import SignUpForm
+
+class SignupView(CreateView):
     template_name = 'authentication/signup.html'
+    form_class = SignUpForm
+    success_url = reverse_lazy('login')
 
 # Home View
 class HomeView(TemplateView):
